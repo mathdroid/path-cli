@@ -1,5 +1,5 @@
 {
-  "name": "path-parser",
+  "name": "path-cli",
   "version": "1.0.0",
   "description": "",
   "bin": "index.js",
