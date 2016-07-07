@@ -6,7 +6,7 @@ let jsonRes = {}
 
 let createTimeline = (tljson) => {
   tljson.moments.
-    map((obj) => obj.type + ': ' + (typeof(obj.comments[0])==='object' ? obj.comments[0].body : obj.headline) + '\n(' + obj.seen_its.total + ' views), ' + moment.unix(obj.created).fromNow() +'\n' ).
+    map((obj) => obj.type + ': ' + (typeof(obj.comments[0])==='object' ? obj.comments[0].body : obj.headline) + '\n(' + obj.seen_its.total + ' views), ' + moment.unix(obj.created).fromNow() +'\nBy: ' + tljson.users[obj.user_id].first_name + ' ' + tljson.users[obj.user_id].last_name + '\n' ).
     forEach((value) => {console.log(value)})
 }
 
@@ -14,7 +14,7 @@ request('https://api.path.com/3/moment/feed/home?oauth_token='+config.USER_TOKEN
   if (!error && response.statusCode == 200) {
     jsonRes = JSON.parse(body)
     createTimeline(jsonRes)
-
+    // console.dir(jsonRes.moments);
   } else {
     console.error(response)
   }
