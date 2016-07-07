@@ -1,11 +1,12 @@
 const request = require('request')
+const moment = require('moment')
 const config = require('./config')
 
 let jsonRes = {}
 
 let createTimeline = (tljson) => {
   tljson.moments.
-    map((obj) => obj.type + ' ' + (typeof(obj.comments[0])==='object' ? obj.comments[0].body : obj.headline) + ' (' + obj.seen_its.total + ' views)' ).
+    map((obj) => obj.type + ': ' + (typeof(obj.comments[0])==='object' ? obj.comments[0].body : obj.headline) + '\n(' + obj.seen_its.total + ' views), ' + moment.unix(obj.created).fromNow() +'\n' ).
     forEach((value) => {console.log(value)})
 }
 
