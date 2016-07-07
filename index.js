@@ -9,7 +9,7 @@ const imageToAscii = require("image-to-ascii")
 
 // const config = require('./config')
 
-const utoken = config.USER_TOKEN || process.env.PATH_CLI_USER_TOKEN || null
+const utoken = process.env.PATH_CLI_USER_TOKEN || null
 
 
 if (utoken==null) {
