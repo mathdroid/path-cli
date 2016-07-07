@@ -7,7 +7,7 @@ const chalk = require('chalk')
 const fs = require('fs')
 const imageToAscii = require("image-to-ascii")
 
-const config = require('./config')
+// const config = require('./config')
 
 const utoken = config.USER_TOKEN || process.env.PATH_CLI_USER_TOKEN || null
 
