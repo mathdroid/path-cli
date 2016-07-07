@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const request = require('request')
 const moment = require('moment')
 const inquirer = require('inquirer')
