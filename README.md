@@ -1,6 +1,6 @@
 # path-cli
 
-![](cli.gif)
+![demo](https://media.giphy.com/media/3o6Zt7abYKQIMCfYK4/giphy.gif)
 
 ## Installation
 
