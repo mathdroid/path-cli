@@ -11,9 +11,9 @@ const imageToAscii = require("image-to-ascii")
 const config = require('./config')
 const Login = require('./login')
 
-const utoken = config.oauth_token || Login.userJson.oauth_token || process.env.PATH_CLI_USER_TOKEN || null
+const utoken = config.oauth_token || process.env.PATH_CLI_USER_TOKEN || null
 
-let tlurl = 'https://api.path.com/3/moment/feed/home?oauth_token=' + utoken + '&limit=60&user_id=4f71d93d3b954a3e53001857&gs=1'
+let tlurl = 'https://api.path.com/3/moment/feed/home?limit=60&oauth_token='
 
 let jsonRes = {}
 let momentsArray = [] //metadata for moments
@@ -88,10 +88,8 @@ let createTimeline = (tljson) => {
   return tlArray
 }
 
-if (utoken==null) {
-  Login.login()
-} else {
-  request(tlurl, function (error, response, body) {
+let requestTimeline = (utoken) => {
+  request(tlurl+utoken, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       jsonRes = JSON.parse(body)
       showTimeline(createTimeline(jsonRes))
@@ -100,4 +98,11 @@ if (utoken==null) {
       console.error(response)
     }
   })
+}
+
+if (utoken==null) {
+  console.log(chalk.red('✗') + ' OAuth token not found. Please login with your ' + chalk.bgRed.bold('Path') + ' credentials.')
+  Login.login(requestTimeline)
+} else {
+  requestTimeline(utoken)
 }
