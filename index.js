@@ -31,6 +31,7 @@ let showTimeline = (tla) => {
       type: 'list',
       name: 'moments',
       message: 'Your timeline:',
+      pageSize: 50,
       choices: tla
     }
   ]).then( (answers) => {
