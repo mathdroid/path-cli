@@ -19,7 +19,10 @@ let tlArray = [] // displayed on tl
 let showTimeline = (tla) => {
   tla = tla.concat([
       new inquirer.Separator(),
-      'Exit',])
+      'Older',
+      'Refresh',
+      'Exit',
+      new inquirer.Separator(), ])
   inquirer.prompt([
     {
       type: 'list',
@@ -27,9 +30,10 @@ let showTimeline = (tla) => {
       message: 'Your timeline:',
       choices: tla
     }
-  ]).then(function (answers) {
+  ]).then( (answers) => {
     let mo = momentsArray[tla.indexOf(answers.moments)]
-    console.log(mo.type)
+    // console.log(mo.type)
+    // console.dir(mo[mo.type])
     mo.type=='photo' ? console.log(mo.photo.photo.url+'/'+mo.photo.photo.square.file) : console.log(mo)
     imageToAscii(mo.photo.photo.url+'/'+mo.photo.photo.square.file, {
         colored: true,
@@ -77,7 +81,7 @@ let showTimeline = (tla) => {
 let createTimeline = (tljson) => {
   momentsArray = tljson.moments
   tlArray = momentsArray.
-    map((obj) => (chalk.bold.white(tljson.users[obj.user_id].first_name) + ' ' + tljson.users[obj.user_id].last_name) + '\'s ' + chalk.white.underline(obj.type) + ': ' + (typeof(obj.comments[0])==='object' ? obj.comments[0].body : obj.headline) + chalk.magenta(' (' + obj.seen_its.total + ' views)') + ', ' + chalk.grey(moment.unix(obj.created).fromNow()) +'' )
+    map((obj) => (chalk.bold.white(tljson.users[obj.user_id].first_name) + ' ' + tljson.users[obj.user_id].last_name) + '\'s ' + chalk.white.underline(obj.type) + ': ' + (typeof(obj.comments[0])==='object' ? (obj.comments[0].body).split('\n').join('⏎ ') : obj.headline) + chalk.magenta(' (' + obj.seen_its.total + ' views)') + ', ' + chalk.grey(moment.unix(obj.created).fromNow()) +'' )
   return tlArray
 }
 
