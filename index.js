@@ -8,8 +8,29 @@ const chalk = require('chalk')
 const fs = require('fs')
 const imageToAscii = require("image-to-ascii")
 
-const config = require('./config')
+
 const Login = require('./login')
+
+let config
+try
+{
+    fs.statSync('./config.json').isFile() ? console.log('cfg exists') : process.exit()
+    let data = fs.readFileSync('./config.json')
+    try {
+      config = JSON.parse(data)
+      console.dir(config)
+    }
+    catch (err) {
+      console.log(chalk.red('✗') + ' There has been an error parsing /config.json.')
+      config = {}
+    }
+}
+catch (err)
+{
+  console.log(chalk.red('✗') + ' No configuration file found.')
+  config = {}
+}
+
 
 const utoken = config.oauth_token || process.env.PATH_CLI_USER_TOKEN || null
 
