@@ -9,7 +9,6 @@
   "author": "Muhammad Mustadi <muhammad.mustadi@gmail.com> (http://mustadi.xyz)",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.12.0",
     "chalk": "^1.1.3",
     "image-to-ascii": "^3.0.3",
     "inquirer": "^1.1.1",

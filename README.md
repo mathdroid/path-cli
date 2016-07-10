@@ -1,5 +1,7 @@
 # path-cli
 
+> Use the most popular social network app in Indonesia on your terminal.
+
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ![demo](https://media.giphy.com/media/3o6Zt7abYKQIMCfYK4/giphy.gif)
@@ -8,7 +10,7 @@
 
 `npm i -g path-cli`
 
-This version requires you to know your OAuth token for Path and `export` it to Environment Variable `PATH_CLI_USER_TOKEN`.
+Tested on Node v6.3.0
 
 ## Dependencies
 
@@ -17,3 +19,7 @@ This version requires you to know your OAuth token for Path and `export` it to E
 ## Improvements
 
 Contributions welcome.
+
+## License
+
+MIT © [Muhammad Mustadi](https://mustadi.xyz)
