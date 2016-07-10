@@ -8,7 +8,6 @@ const chalk = require('chalk')
 const fs = require('fs')
 const imageToAscii = require("image-to-ascii")
 
-
 const Login = require('./login')
 
 let config
@@ -31,11 +30,8 @@ catch (err)
   config = {}
 }
 
-
 const utoken = config.oauth_token || process.env.PATH_CLI_USER_TOKEN || null
-
 let tlurl = 'https://api.path.com/3/moment/feed/home?limit=60&oauth_token='
-
 let jsonRes = {}
 let momentsArray = [] //metadata for moments
 let tlArray = [] // displayed on tl
