@@ -1,5 +1,7 @@
 # path-cli
 
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 ![demo](https://media.giphy.com/media/3o6Zt7abYKQIMCfYK4/giphy.gif)
 
 ## Installation

@@ -18,16 +18,15 @@ let ui
 
 let userJson = {}
 let cb
-let ut
 
-function showLoadingBar(message) {
+function showLoadingBar (message) {
   ui = new BottomBar({bottomBar: loader[i % 4] + message})
   loadingInterval = setInterval(() => {
     ui.updateBottomBar(loader[i++ % 4] + message)
   }, 100)
 }
 
-function inputUsername(callback) {
+function inputUsername (callback) {
   cb = callback
   inquirer.prompt([
     {
@@ -39,7 +38,7 @@ function inputUsername(callback) {
     inputPassword(answers)
   })
 }
-function inputPassword(username) {
+function inputPassword (username) {
   inquirer.prompt([
     {
       type: 'password',
@@ -50,18 +49,18 @@ function inputPassword(username) {
     // console.log(JSON.stringify(username, null, '  '))
     // console.log(JSON.stringify(answers, null, '  '))
     apiAuthenticate(username.username, password.password)
-  });
+  })
 }
 
-function apiAuthenticate(username, password) {
+function apiAuthenticate (username, password) {
   showLoadingBar('Logging in as ' + chalk.bold.underline(username) + '...')
-  request.post({url:'https://api.path.com/3/user/authenticate', formData: {post: JSON.stringify({
-      login: username,
-      password: password,
-      client_id: 'MzVhMzQ4MTEtZWU2Ni00MzczLWE5NTItNTBhYjJlMzE0YTgz',
-      reactivate_user: 1
-    })}
-  }, function optionalCallback(err, httpResponse, body) {
+  request.post({url: 'https://api.path.com/3/user/authenticate', formData: {post: JSON.stringify({
+    login: username,
+    password: password,
+    client_id: 'MzVhMzQ4MTEtZWU2Ni00MzczLWE5NTItNTBhYjJlMzE0YTgz',
+    reactivate_user: 1
+  })}
+  }, function optionalCallback (err, httpResponse, body) {
     clearInterval(loadingInterval)
     if (err) {
       ui.updateBottomBar(chalk.red('✗') + ' LOGIN FAILURE. ')
@@ -73,12 +72,12 @@ function apiAuthenticate(username, password) {
       console.error('Reason:', userJson.error_reason)
       return process.exit()
     }
-    ui.updateBottomBar( chalk.green('✓') + chalk.bold(' Logged in') + ' as ' + chalk.bold(userJson.first_name + ' ' + userJson.last_name) + '. Your OAuth token is \'' + chalk.underline(userJson.oauth_token) + '\'.\n')
+    ui.updateBottomBar(chalk.green('✓') + chalk.bold(' Logged in') + ' as ' + chalk.bold(userJson.first_name + ' ' + userJson.last_name) + ". Your OAuth token is '" + chalk.underline(userJson.oauth_token) + "'.\n")
     inquireSaveCred()
-  });
+  })
 }
 
-function inquireSaveCred() {
+function inquireSaveCred () {
   inquirer.prompt([
     {
       type: 'confirm',
@@ -88,18 +87,18 @@ function inquireSaveCred() {
     }
   ]).then(function (save) {
     if (save.save) {
-      showLoadingBar('Saving to ' + __dirname + '/config.json')
+      showLoadingBar('Saving to ' + String(__dirname) + '/config.json')
       fs.writeFile('./config.json', JSON.stringify({oauth_token: userJson.oauth_token}), (err) => {
         clearInterval(loadingInterval)
         if (err) throw err
-        ui.updateBottomBar( chalk.green('✓') + chalk.bold(' Saved to ') + __dirname + '/config.json')
+        ui.updateBottomBar(chalk.green('✓') + chalk.bold(' Saved to ') + String(__dirname) + '/config.json')
         cb(userJson.oauth_token)
-      });
+      })
     } else {
-      ui.updateBottomBar( chalk.green('✓') + ' Credentials not saved. Proceeding to timeline.')
+      ui.updateBottomBar(chalk.green('✓') + ' Credentials not saved. Proceeding to timeline.')
       cb(userJson.oauth_token)
     }
-  });
+  })
 }
 
 module.exports = {
