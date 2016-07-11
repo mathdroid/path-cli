@@ -3,6 +3,7 @@
 'use strict'
 const chalk = require('chalk')
 
+const PathClient = require('./lib/PathClient')
 const Login = require('./ui/views/LoginView')
 const Timeline = require('./ui/views/TimelineView')
 const helper = require('./lib/helper')
@@ -18,7 +19,8 @@ let main = () => {
     console.log(chalk.red('✗') + ' OAuth token not found. Please login with your ' + chalk.bgRed.bold('Path') + ' credentials.')
     Login.login(logger)
   } else {
-    logger(utoken)
+    // logger(utoken)
+    PathClient.requestTimeline(utoken, Timeline.goToTimelineView)
   }
 }
 
