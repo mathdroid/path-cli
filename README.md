@@ -10,7 +10,7 @@
 
 `npm i -g path-cli`
 
-Tested on Node v6.3.0
+Tested on `node` v6.3.0
 
 ## Dependencies
 

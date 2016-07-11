@@ -67,11 +67,11 @@ let showTimeline = (tlinstance) => {
   })
 }
 
-let goToTimelineView = (dataJSON) => {
+let initTimelineView = (dataJSON) => {
   TL = new Timeline(dataJSON)
   showTimeline(TL)
 }
 
 module.exports = {
-  goToTimelineView
+  initTimelineView
 }
