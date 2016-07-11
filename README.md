@@ -1,4 +1,4 @@
-# path-cli
+# path-cli (DO NOT BUILD THIS VERSION YET!) :)
 
 > Use the most popular social network app in Indonesia on your terminal.
 
